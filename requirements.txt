@@ -1,6 +1,6 @@
-asgiref==3.3.1
+asgiref==3.3.4
 bcrypt==3.2.0
-Django==3.1.7
+Django==3.2
 psycopg2==2.8.6
 pycparser==2.20
 pytz==2021.1
