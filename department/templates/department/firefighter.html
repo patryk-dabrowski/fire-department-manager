@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>Data urodzenia</th>
+      <th>Data wstąpienia</th>
+      <th>Badania</th>
+      <th>Ubezpieczenie</th>
+      <th>Kierowca</th>
+      <th>Prawo jazdy</th>
+      <th>Termin wkładki</th>
+      <th>Termin kpp</th>
+      <th>Ostatnia składka</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for firefighter in object_list %}
+      <tr>
+        <td title="{{ firefighter.pk }}">
+          {{ firefighter.pk }}
+        </td>
+        <td title="{{ firefighter.user.first_name }}">
+          {{ firefighter.user.first_name }}
+        </td>
+        <td title="{{ firefighter.user.last_name }}">
+          {{ firefighter.user.last_name }}
+        </td>
+        <td title="{{ firefighter.data_urodzenia }}">
+          {{ firefighter.data_urodzenia }}
+        </td>
+        <td title="{{ firefighter.data_wstapienia }}">
+          {{ firefighter.data_wstapienia }}
+        </td>
+        <td title="{{ firefighter.ostatnie_badanie }} - {{ firefighter.nastepne_badanie }}">
+          {{ firefighter.ostatnie_badanie }} - {{ firefighter.nastepne_badanie }}
+        </td>
+        <td title="{{ firefighter.ubezpieczenie }}">
+          {{ firefighter.ubezpieczenie }}
+        </td>
+        <td title="{{ firefighter.kierowca | yesno:'tak,nie' }}">
+          {{ firefighter.kierowca | yesno:'tak,nie' }}
+        </td>
+        <td title="{{ firefighter.termin_prawa_jazdy }}">
+          {{ firefighter.termin_prawa_jazdy }}
+        </td>
+        <td title="{{ firefighter.termin_wkladki }}">
+          {{ firefighter.termin_wkladki }}
+        </td>
+        <td title="{{ firefighter.termin_kpp }}">
+          {{ firefighter.termin_kpp| default_if_none:"-" }}
+        </td>
+        <td title="{{ firefighter.ostatnia_skladka }}">
+          {{ firefighter.ostatnia_skladka }}
+        </td>
+        <td title="{{ firefighter.status }}">
+          {{ firefighter.status }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

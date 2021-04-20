@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, ListView
 from django.views.generic.base import TemplateResponseMixin, View
 
-from .models import Pojazdy, Sprzet
+from .models import Pojazdy, Sprzet, Strazacy
 
 
 class HomeView(TemplateView):
@@ -16,6 +16,12 @@ class EquipmentView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.prefetch_related('przeglad_sprzet')
+
+
+class FirefighterView(ListView):
+    template_name = 'department/firefighter.html'
+    model = Strazacy
+    ordering = ('pk',)
 
 
 class VehicleView(TemplateResponseMixin, View):
