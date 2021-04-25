@@ -1,33 +1,10 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
-from django.views.generic.base import TemplateResponseMixin, View
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from .forms import FirefighterUpdateForm, FirefighterCreateForm
-from .models import Pojazdy, Sprzet, Strazacy
-
-
-class HomeView(TemplateView):
-    template_name = 'department/home.html'
-
-
-class EquipmentView(ListView):
-    template_name = 'department/equipment.html'
-    model = Sprzet
-    ordering = ('pk',)
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.prefetch_related('przeglad_sprzet')
-
-
-class VehicleView(TemplateResponseMixin, View):
-    template_name = 'department/vehicle.html'
-
-    def get(self, request):
-        vehicles = Pojazdy.objects.all()
-        return self.render_to_response({"vehicles": vehicles})
+from department.forms import FirefighterCreateForm, FirefighterUpdateForm
+from department.models import Strazacy
 
 
 class FirefighterView(ListView):
