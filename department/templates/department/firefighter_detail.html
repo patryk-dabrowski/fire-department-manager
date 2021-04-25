@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="confirm-form">
+    <a href="{{ go_back }}">Powrót</a>
+    <p>
+      <span class="field-name">Imie:</span>
+      <span class="field-value">{{ object.user.first_name }}</span>
+    </p>
+    <p>
+      <span class="field-name">Nazwisko:</span>
+      <span class="field-value">{{ object.user.last_name }}</span>
+    </p>
+    <p>
+      <span class="field-name">Nazwa użytkownika:</span>
+      <span class="field-value">{{ object.user.username }}</span>
+    </p>
+    <p>
+      <span class="field-name">Email:</span>
+      <span class="field-value">{{ object.user.email }}</span>
+    </p>
+    <p>
+      <span class="field-name">Data urodzenia:</span>
+      <span class="field-value">{{ object.data_urodzenia }}</span>
+    </p>
+    <p>
+      <span class="field-name">Data wstąpienia:</span>
+      <span class="field-value">{{ object.data_wstapienia }}</span>
+    </p>
+    <p>
+      <span class="field-name">Badanie:</span>
+      <span class="field-value">{{ object.ostatnie_badanie }} - {{ object.nastepne_badanie }}</span>
+    </p>
+    <p>
+      <span class="field-name">Ubezpieczenie:</span>
+      <span class="field-value">{{ object.ubezpieczenie }}</span>
+    </p>
+    <p>
+      <span class="field-name">Kierowca:</span>
+      <span class="field-value">{{ object.kierowca | yesno:'tak,nie' }}</span>
+    </p>
+    <p>
+      <span class="field-name">Prawo jazdy:</span>
+      <span class="field-value">{{ object.termin_prawa_jazdy }}</span>
+    </p>
+    <p>
+      <span class="field-name">Termin wkładki:</span>
+      <span class="field-value">{{ object.termin_wkladki }}</span>
+    </p>
+    <p>
+      <span class="field-name">Termin kpp:</span>
+      <span class="field-value">{{ object.termin_kpp | default:'-' }}</span>
+    </p>
+    <p>
+      <span class="field-name">Ostatnia składka:</span>
+      <span class="field-value">{{ object.ostatnia_skladka }}</span>
+    </p>
+    <p>
+      <span class="field-name">Status:</span>
+      <span class="field-value">{{ object.status }}</span>
+    </p>
+    <p>
+      <span class="field-name">Uwagi:</span>
+      <span class="field-value">{{ object.uwagi | default:'-' }}</span>
+    </p>
+    <div class="pull-right">
+      <a class="action-secondary" href="{% url 'firefighter-delete' object.pk %}">Usuń</a>
+      <a class="action-primary" href="{% url 'firefighter-update' object.pk %}">Edytuj</a>
+    </div>
+  </div>
+{% endblock content %}

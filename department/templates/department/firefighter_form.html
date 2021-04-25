@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Aktualizuj">
-  </form>
+  <div class="confirm-form">
+    <a href="{{ go_back }}">Powrót</a>
+    <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <div class="pull-right">
+        <input class="action-primary" type="submit" value="Zapisz">
+      </div>
+    </form>
+  </div>
 {% endblock content %}

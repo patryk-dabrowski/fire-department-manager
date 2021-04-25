@@ -159,3 +159,41 @@ tr:hover {
 .errorlist li {
     margin-left: 10px;
 }
+
+.field-name {
+    font-weight: bold;
+}
+
+.confirm {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.confirm-form {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.6);
+}
+
+.action-secondary {
+    text-decoration: none;
+    color: var(--primary-text);
+    cursor: pointer;
+}
+
+.action-primary {
+    background-color: var(--primary);
+    border: 0;
+    padding: 10px;
+    min-width: 100px;
+    text-decoration: none;
+    color: var(--secondary-text);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pull-right {
+    text-align: right;
+}

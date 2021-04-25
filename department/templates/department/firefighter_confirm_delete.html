@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="confirm">
+    <form method="post" class="confirm-form">
+      {% csrf_token %}
+      <p>Czy na pewno chcesz usunąć "{{ object }}"?</p>
+      <div class="pull-right">
+        <a class="action-secondary" href="{{ go_back }}">Anuluj</a>
+        <input class="action-primary" type="submit" value="Tak">
+      </div>
+    </form>
+  </div>
+{% endblock content %}

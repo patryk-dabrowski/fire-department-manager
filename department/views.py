@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.views.generic.base import TemplateResponseMixin, View
 
@@ -40,9 +40,7 @@ class FirefighterCreateView(CreateView):
     template_name = 'department/firefighter_form.html'
     model = Strazacy
     form_class = FirefighterCreateForm
-
-    def get_success_url(self):
-        return reverse('firefighter')
+    success_url = reverse_lazy('firefighter')
 
     def form_valid(self, form):
         first_name = form.cleaned_data.get('first_name')
@@ -56,9 +54,24 @@ class FirefighterCreateView(CreateView):
         instance.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "go_back": reverse('firefighter')
+        })
+        return context
+
 
 class FirefighterDetailView(DetailView):
-    pass
+    template_name = 'department/firefighter_detail.html'
+    model = Strazacy
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "go_back": reverse('firefighter')
+        })
+        return context
 
 
 class FirefighterUpdateView(UpdateView):
@@ -78,6 +91,22 @@ class FirefighterUpdateView(UpdateView):
         instance.user.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "go_back": reverse('firefighter-detail', args=(self.kwargs['pk'],))
+        })
+        return context
+
 
 class FirefighterDeleteView(DeleteView):
-    pass
+    model = Strazacy
+    template_name = 'department/firefighter_confirm_delete.html'
+    success_url = reverse_lazy('firefighter')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "go_back": reverse('firefighter-detail', args=(self.kwargs['pk'],))
+        })
+        return context
