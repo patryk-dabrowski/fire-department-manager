@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from django.views.generic.base import TemplateResponseMixin, View
 
-from .forms import FirefighterCreate
+from .forms import FirefighterUpdateForm, FirefighterCreateForm
 from .models import Pojazdy, Sprzet, Strazacy
 
 
@@ -35,7 +37,24 @@ class FirefighterView(ListView):
 
 
 class FirefighterCreateView(CreateView):
-    pass
+    template_name = 'department/firefighter_form.html'
+    model = Strazacy
+    form_class = FirefighterCreateForm
+
+    def get_success_url(self):
+        return reverse('firefighter')
+
+    def form_valid(self, form):
+        first_name = form.cleaned_data.get('first_name')
+        last_name = form.cleaned_data.get('last_name')
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        user = User.objects.create_user(username, email, password, first_name=first_name, last_name=last_name)
+        instance = form.save(commit=False)
+        instance.user = user
+        instance.save()
+        return super().form_valid(form)
 
 
 class FirefighterDetailView(DetailView):
@@ -45,19 +64,19 @@ class FirefighterDetailView(DetailView):
 class FirefighterUpdateView(UpdateView):
     template_name = 'department/firefighter_form.html'
     model = Strazacy
-    form_class = FirefighterCreate
+    form_class = FirefighterUpdateForm
 
     def get_success_url(self):
         return reverse('firefighter-detail', args=(self.kwargs['pk'],))
 
     def form_valid(self, form):
-        instance = form.instance
+        instance = form.save()
         instance.user.first_name = form.cleaned_data.get('first_name')
         instance.user.last_name = form.cleaned_data.get('last_name')
+        instance.user.username = form.cleaned_data.get('username')
         instance.user.email = form.cleaned_data.get('email')
         instance.user.save()
-        return super().form_valid(form)
-
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class FirefighterDeleteView(DeleteView):

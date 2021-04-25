@@ -150,3 +150,12 @@ td {
 tr:hover {
     background-color: var(--primary);
 }
+
+.errorlist {
+    background-color: #fb756b;
+    padding: 20px;
+}
+
+.errorlist li {
+    margin-left: 10px;
+}
