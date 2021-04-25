@@ -23,7 +23,7 @@
     {% for firefighter in object_list %}
       <tr>
         <td title="{{ firefighter.pk }}">
-          {{ firefighter.pk }}
+          <a href="{% url 'firefighter-detail' firefighter.pk %}">{{ firefighter.pk }}</a>
         </td>
         <td title="{{ firefighter.user.first_name }}">
           {{ firefighter.user.first_name }}
