@@ -7,7 +7,7 @@ from department.forms import FirefighterCreateForm, FirefighterUpdateForm
 from department.models import Strazacy
 
 
-class FirefighterView(ListView):
+class FirefighterListView(ListView):
     template_name = 'department/firefighter_list.html'
     model = Strazacy
     ordering = ('pk',)
@@ -17,7 +17,7 @@ class FirefighterCreateView(CreateView):
     template_name = 'department/firefighter_form.html'
     model = Strazacy
     form_class = FirefighterCreateForm
-    success_url = reverse_lazy('firefighter')
+    success_url = reverse_lazy('firefighter-list')
 
     def form_valid(self, form):
         first_name = form.cleaned_data.get('first_name')
@@ -34,7 +34,7 @@ class FirefighterCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            "go_back": reverse('firefighter')
+            "go_back": reverse('firefighter-list')
         })
         return context
 
@@ -46,7 +46,7 @@ class FirefighterDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            "go_back": reverse('firefighter')
+            "go_back": reverse('firefighter-list')
         })
         return context
 
@@ -79,7 +79,7 @@ class FirefighterUpdateView(UpdateView):
 class FirefighterDeleteView(DeleteView):
     model = Strazacy
     template_name = 'department/firefighter_confirm_delete.html'
-    success_url = reverse_lazy('firefighter')
+    success_url = reverse_lazy('firefighter-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

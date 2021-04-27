@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
 {% block content %}
+  <p class="pull-right"><a class="action-primary" href="{% url 'firefighter-create' %}">Dodaj nowy</a></p>
   <table>
     <thead>
     <tr>
@@ -27,36 +27,18 @@
         <td title="{{ firefighter.user.first_name }} {{ firefighter.user.last_name }}">
           {{ firefighter.user.first_name }} {{ firefighter.user.last_name }}
         </td>
-        <td title="{{ firefighter.data_urodzenia }}">
-          {{ firefighter.data_urodzenia }}
-        </td>
-        <td title="{{ firefighter.data_wstapienia }}">
-          {{ firefighter.data_wstapienia }}
-        </td>
+        <td title="{{ firefighter.data_urodzenia }}">{{ firefighter.data_urodzenia }}</td>
+        <td title="{{ firefighter.data_wstapienia }}">{{ firefighter.data_wstapienia }}</td>
         <td title="{{ firefighter.ostatnie_badanie }} - {{ firefighter.nastepne_badanie }}">
           {{ firefighter.ostatnie_badanie }} - {{ firefighter.nastepne_badanie }}
         </td>
-        <td title="{{ firefighter.ubezpieczenie }}">
-          {{ firefighter.ubezpieczenie }}
-        </td>
-        <td title="{{ firefighter.termin_prawa_jazdy }}">
-          {{ firefighter.termin_prawa_jazdy }}
-        </td>
-        <td title="{{ firefighter.termin_wkladki }}">
-          {{ firefighter.termin_wkladki }}
-        </td>
-        <td title="{{ firefighter.termin_kpp }}">
-          {{ firefighter.termin_kpp| default_if_none:"-" }}
-        </td>
-        <td title="{{ firefighter.ostatnia_skladka }}">
-          {{ firefighter.ostatnia_skladka }}
-        </td>
-        <td title="{{ firefighter.status }}">
-          {{ firefighter.status }}
-        </td>
-        <td title="{{ firefighter.uwagi }}">
-          {{ firefighter.uwagi }}
-        </td>
+        <td title="{{ firefighter.ubezpieczenie }}">{{ firefighter.ubezpieczenie }}</td>
+        <td title="{{ firefighter.termin_prawa_jazdy }}">{{ firefighter.termin_prawa_jazdy }}</td>
+        <td title="{{ firefighter.termin_wkladki }}">{{ firefighter.termin_wkladki }}</td>
+        <td title="{{ firefighter.termin_kpp }}">{{ firefighter.termin_kpp| default_if_none:"-" }}</td>
+        <td title="{{ firefighter.ostatnia_skladka }}">{{ firefighter.ostatnia_skladka }}</td>
+        <td title="{{ firefighter.status }}">{{ firefighter.status }}</td>
+        <td title="{{ firefighter.uwagi }}">{{ firefighter.uwagi }}</td>
       </tr>
     {% endfor %}
     </tbody>

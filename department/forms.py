@@ -13,9 +13,9 @@ class FirefighterUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Strazacy
-        fields = ('first_name', 'last_name', 'username', 'email', 'data_urodzenia', 'data_wstapienia', 'ostatnie_badanie',
-                  'nastepne_badanie', 'ubezpieczenie', 'kierowca', 'termin_prawa_jazdy', 'termin_wkladki', 'termin_kpp',
-                  'ostatnia_skladka', 'status', 'uwagi',)
+        fields = ('first_name', 'last_name', 'username', 'email', 'data_urodzenia', 'data_wstapienia',
+                  'ostatnie_badanie', 'nastepne_badanie', 'ubezpieczenie', 'kierowca', 'termin_prawa_jazdy',
+                  'termin_wkladki', 'termin_kpp', 'ostatnia_skladka', 'status', 'uwagi',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,17 +43,16 @@ class FirefighterCreateForm(forms.ModelForm):
 
     class Meta:
         model = Strazacy
-        fields = ('first_name', 'last_name', 'username', 'email', 'password', 'password_repeat', 'data_urodzenia', 'data_wstapienia', 'ostatnie_badanie',
-                  'nastepne_badanie', 'ubezpieczenie', 'kierowca', 'termin_prawa_jazdy', 'termin_wkladki', 'termin_kpp',
-                  'ostatnia_skladka', 'status', 'uwagi',)
+        fields = ('first_name', 'last_name', 'username', 'email', 'password', 'password_repeat', 'data_urodzenia',
+                  'data_wstapienia', 'ostatnie_badanie', 'nastepne_badanie', 'ubezpieczenie', 'kierowca',
+                  'termin_prawa_jazdy', 'termin_wkladki', 'termin_kpp', 'ostatnia_skladka', 'status', 'uwagi',)
 
     def clean(self):
         password = self.cleaned_data.get('password')
         password_repeat = self.cleaned_data.get('password_repeat')
 
-        print('password, password_repeat', password, password_repeat)
         if password != password_repeat:
-            raise ValidationError('Hasła muszą być takie same.',)
+            raise ValidationError('Hasła muszą być takie same.', )
         return super().clean()
 
     def clean_username(self):
